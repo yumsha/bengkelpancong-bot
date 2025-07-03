@@ -26,11 +26,14 @@ client.on('channelCreate', async (channel) => {
 
     setTimeout(async () => {
       try {
-        const messages = await channel.messages.fetch({ limit: 1 });
-        if (messages.size > 0) {
-          console.log(`⚠️ Sudah ada pesan di ${channel.name}, tidak dikirim ulang.`);
+        const messages = await channel.messages.fetch({ limit: 10 }); // ambil 10 pesan terakhir
+        const alreadySent = messages.some(msg => msg.author.id === client.user.id);
+
+        if (alreadySent) {
+          console.log(`⚠️ Embed payment sudah dikirim sebelumnya di ${channel.name}, tidak dikirim ulang.`);
           return;
         }
+
 
         await channel.send({
           embeds: [{
