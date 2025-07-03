@@ -22,23 +22,22 @@ client.on('channelCreate', async (channel) => {
     channel.type === ChannelType.GuildText &&
     allowedCategoryIds.includes(channel.parentId)
   ) {
-    console.log(`🎫 Tiket baru dibuat: ${channel.name}, delay 3 detik...`);
+    console.log(`🎫 Tiket baru dibuat! : ${channel.name}`);
 
     setTimeout(async () => {
       try {
-        const messages = await channel.messages.fetch({ limit: 10 }); // ambil 10 pesan terakhir
+        const messages = await channel.messages.fetch({ limit: 10 });
         const alreadySent = messages.some(msg => msg.author.id === client.user.id);
 
         if (alreadySent) {
-          console.log(`⚠️ Embed payment sudah dikirim sebelumnya di ${channel.name}, tidak dikirim ulang.`);
+          console.log(`udah dikirim, goblok. ${channel.name}, tidak dikirim ulang.`);
           return;
         }
-
 
         await channel.send({
           embeds: [{
             title: "🟡 BENGKEL PANCONG PAYMENT 🟡",
-            description: `PASTIKAN UNTUK CEK TERLEBIH DAHULU...`,
+            description: `PASTIKAN UNTUK CEK TERLEBIH DAHULU NOMINAL DAN MENGGUNAKAN PAYMENT SERTA CEK TERLEBIH DAHULU ATAS NAMA SESUAI PAYMENT YANG TERSEDIA ⚠️\n\nGOPAY : 089627299428 A/N BUSTAMI ✅\n📱 089627299428 A/N MOHAMMAD RIZKY QURBANY ✅\n⚠️ UNTUK PENGGUNAAN QRIS DIKENAKAN PAJAK +500⚠️`,
             image: { url: "https://i.imgur.com/LKEdq34.png" },
             color: 0x00AE86
           }]
@@ -46,21 +45,22 @@ client.on('channelCreate', async (channel) => {
 
         console.log(`✅ Embed dikirim ke ${channel.name}`);
       } catch (err) {
-        console.error(`❌ Error saat kirim embed:`, err);
+        console.error(`Error pas mau dikirim ke ${channel.name}:`, err);
       }
     }, 3000);
+  } else {
+    console.log(`ℹ️ Channel ${channel.name} dah dibikin tapi gadapet izin, kocak..`);
   }
 });
 
-
-// ===== SERVER =====
+// ===== KEEP-ALIVE SERVER UNTUK RENDER =====
 app.get('/', (req, res) => {
-  res.send('Bot Nyala!');
+  res.setHeader('Content-Type', 'text/plain');
+  res.send('Bot Nyala');
 });
 
 app.listen(3000, () => {
-  console.log('web nyala di port 3000');
+  console.log('nyala di port 3000');
 });
-
 
 client.login(process.env.DISCORD_TOKEN);
