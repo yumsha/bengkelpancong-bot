@@ -24,24 +24,31 @@ client.on('channelCreate', async (channel) => {
   ) {
     console.log(`🎫 Tiket baru dibuat: ${channel.name}, delay 3 detik...`);
 
-    setTimeout(() => {
-      channel.send({
-        embeds: [{
-          title: "🟡 BENGKEL PANCONG PAYMENT 🟡",
-          description: `PASTIKAN UNTUK CEK TERLEBIH DAHULU NOMINAL DAN MENGGUNAKAN PAYMENT SERTA CEK TERLEBIH DAHULU ATAS NAMA SESUAI PAYMENT YANG TERSEDIA ⚠️:\n\n📱GOPAY : 089627299428 A/N BUSTAMI ✅\n📱DANA 089627299428 A/N MOHAMMAD RIZKY QURBANY ✅\n⚠️ UNTUK PENGGUNAAN QRIS DIKENAKAN PAJAK +500 ⚠️`,
-          image: {
-            url: "https://i.imgur.com/LKEdq34.png"
-          },
-          color: 0x00AE86
-        }]
-      }).then(() => {
-        console.log(`udah dikirim ${channel.name}`);
-      }).catch((err) => {
-        console.error(`Gagal kirim ${channel.name}:`, err);
-      });
+    setTimeout(async () => {
+      try {
+        const messages = await channel.messages.fetch({ limit: 1 });
+        if (messages.size > 0) {
+          console.log(`⚠️ Sudah ada pesan di ${channel.name}, tidak dikirim ulang.`);
+          return;
+        }
+
+        await channel.send({
+          embeds: [{
+            title: "🟡 BENGKEL PANCONG PAYMENT 🟡",
+            description: `PASTIKAN UNTUK CEK TERLEBIH DAHULU...`,
+            image: { url: "https://i.imgur.com/LKEdq34.png" },
+            color: 0x00AE86
+          }]
+        });
+
+        console.log(`✅ Embed dikirim ke ${channel.name}`);
+      } catch (err) {
+        console.error(`❌ Error saat kirim embed:`, err);
+      }
     }, 3000);
   }
 });
+
 
 // ===== SERVER =====
 app.get('/', (req, res) => {
