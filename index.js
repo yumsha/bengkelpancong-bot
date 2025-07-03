@@ -24,7 +24,7 @@ await channel.send({
     title: "🟡 BENGKEL PANCONG PAYMENT 🟡",
     description: `PASTIKAN UNTUK CEK TERLEBIH DAHULU NOMINAL DAN MENGUNKAN PAYMENT SERTA CEK TERLEBIH DAHULU ATAS NAMA SESUAI PAYMENT YANG TERSEDIA ⚠️:\n\n GOPAY : 089627299428 A/N BUSTAMI ✅\n📱 089627299428 A/N MOHAMMAD RIZKY QURBANY  ✅\n ⚠️UNTUK PENGGUNAAN QRIS DIKENAKAN PAJAK +500⚠️`,
     image: {
-      url: "https://imgur.com/a/pGFo5z8.png"
+      url: "https://i.imgur.com/B8slRMF.png"
     },
     color: 0x00AE86
   }]
@@ -34,15 +34,3 @@ await channel.send({
 });
 
 client.login(process.env.DISCORD_TOKEN);
-
-// 
-
-// 
-
-// GOPAY : 089627299428 A/N BUSTAMI ✅
-
-// DANA :  
-
-// 
-
-// STAY AMANAH DAN SUKSES SELALU KING 🟡
