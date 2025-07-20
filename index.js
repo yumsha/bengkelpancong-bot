@@ -65,7 +65,7 @@ client.on('channelCreate', async (channel) => {
 
     setTimeout(async () => {
       try {
-        const messages = await channel.messages.fetch({ limit: 10 });
+        const messages = await channel.messages.fetch( { limit: 10 } );
         const alreadySent = messages.some(msg => msg.author.id === client.user.id);
 
         if (alreadySent) {
