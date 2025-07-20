@@ -105,7 +105,7 @@ client.on('messageCreate', async (message)=>{
   if (!message.member.roles.cache.has(allowedRoles)) return;
 
   const attachments = message.attachments.first();
-  const content = message.content || "**No content provided**";
+  const content = message.content || "*No content provided*";
 
   const embed = new EmbedBuilder()
     .setTitle("Preview for your Forsale Post")
